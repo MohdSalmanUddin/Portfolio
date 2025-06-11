@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', 'Nunito', 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0a0c16 0%, #181c2a 50%, #1a1333 100%);
+    min-height: 100vh;
+    animation: odoo-gradient 12s ease-in-out infinite alternate;
+  }
+
+  body {
+    @apply antialiased bg-gray-950 dark:bg-gray-950;
+  }
+}
+
+@keyframes odoo-gradient {
+  0% {
+    background: linear-gradient(135deg, #f5f6fa 0%, #e0e7ff 50%, #b388ff 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, #ede7f6 0%, #c7d2fe 50%, #7c3aed 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, #f5f6fa 0%, #e0e7ff 50%, #b388ff 100%);
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .odoo-card {
+    @apply bg-white dark:bg-gray-900 rounded-2xl shadow-xl transition-transform duration-300;
+    box-shadow: 0 4px 24px 0 rgba(124,58,237,0.08), 0 1.5px 6px 0 rgba(124,58,237,0.08);
+  }
+
+  .odoo-card:hover {
+    transform: translateY(-8px) scale(1.03) rotateZ(-1deg);
+    box-shadow: 0 8px 32px 0 rgba(124,58,237,0.16), 0 3px 12px 0 rgba(124,58,237,0.12);
+  }
+
+  .odoo-btn {
+    @apply bg-purple-600 text-white rounded-full px-6 py-2 font-semibold shadow-md transition-all duration-200;
+  }
+
+  .odoo-btn:hover {
+    @apply bg-purple-700 shadow-lg;
+    transform: scale(1.05);
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+a {
+  transition: color 0.2s, background 0.2s;
+}
+
+a:hover {
+  text-decoration: underline;
+} 
+/* Custom themed scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #a259c4 0%, #f06292 50%, #64b5f6 100%);
+  border-radius: 8px;
+  border: 2px solid #181c2a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #f06292 0%, #a259c4 100%);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a259c4 #181c2a;
+}
