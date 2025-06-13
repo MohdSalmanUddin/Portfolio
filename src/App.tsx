@@ -22,10 +22,53 @@ const navItems = [
 
 const sectionIds = ['home', 'about', 'project', 'contact'];
 
+const getInitialTheme = () => {
+  if (typeof window !== 'undefined') {
+    const theme = localStorage.getItem('theme');
+    if (theme) return theme === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  return false;
+};
+
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(getInitialTheme);
   const [navShadow, setNavShadow] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Persist theme in localStorage
+  useEffect(() => {
+    // On mount, check localStorage or system preference
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else if (storedTheme === 'light') {
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    } else {
+      // Default to system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(prefersDark);
+      if (prefersDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, []);
+
+  // Update localStorage and html class on theme change
+  useEffect(() => {
+    if (darkMode) {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add('dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,17 +91,19 @@ const App = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen font-sans ${darkMode ? 'dark bg-gray-950' : 'bg-white'}`}>
+    <div className={`min-h-screen font-sans ${darkMode ? 'dark bg-gray-950' : 'bg-white'} overflow-x-hidden`}>
       {/* Fancy Glassmorphic Navbar */}
       <nav className={`fixed w-full z-50 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl border-b border-gradient-to-r from-purple-400 via-pink-300 to-blue-400 dark:from-purple-900 dark:via-purple-700 dark:to-blue-900 transition-shadow ${navShadow ? 'shadow-2xl' : ''}`}
         style={{ WebkitBackdropFilter: 'blur(16px)', backdropFilter: 'blur(16px)', borderImage: 'linear-gradient(90deg, #a259c4 0%, #f06292 50%, #64b5f6 100%) 1' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex-shrink-0">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 w-full">
+            {/* Logo (left) */}
+            <div className="flex-shrink-0 flex items-center">
               <span className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 dark:from-purple-300 dark:via-pink-300 dark:to-blue-300 select-none">OdooDev</span>
             </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
+            {/* Nav Links (center, hidden on mobile) */}
+            <div className="hidden md:flex flex-1 justify-center">
+              <div className="flex items-baseline space-x-4">
                 {navItems.map((item) => (
                   <a
                     key={item.label}
@@ -76,51 +121,83 @@ const App = () => {
                 ))}
               </div>
             </div>
-            {/* Modern Slider Theme Toggler */}
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="relative w-16 h-8 flex items-center px-1 rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 shadow-lg border-2 border-white/20 dark:border-gray-900/40 transition-colors duration-500 focus:outline-none focus:ring-2 focus:ring-purple-400 group"
-              aria-label="Toggle theme"
-              style={{ minWidth: '64px' }}
-            >
-              {/* Sun Icon (left) */}
-              <span className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" className={`w-4 h-4 transition-all duration-300 ${!darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </span>
-              {/* Moon Icon (right) */}
-              <span className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" className={`w-4 h-4 transition-all duration-300 ${darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
-                </svg>
-              </span>
-              {/* Slider Thumb */}
-              <span
-                className={`absolute top-1/2 -translate-y-1/2 z-20 w-6 h-6 rounded-full bg-white/80 dark:bg-gray-900/80 shadow-md border-2 border-purple-200 dark:border-purple-700 transition-all duration-500 flex items-center justify-center ${darkMode ? 'right-1' : 'left-1'}`}
-                style={{ boxShadow: '0 2px 8px 0 rgba(130, 88, 159, 0.18)' }}
+            {/* Toggler and Hamburger (right) */}
+            <div className="flex items-center space-x-2">
+              {/* Theme toggler */}
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className="relative w-14 h-7 flex items-center rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 shadow-lg border-2 border-white/20 dark:border-gray-900/40 transition-colors duration-500 focus:outline-none focus:ring-2 focus:ring-purple-400 group"
+                aria-label="Toggle theme"
+                style={{ minWidth: '58px', padding: 0 }}
               >
-                {darkMode ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-purple-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-yellow-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                {/* Sun Icon (left) */}
+                <span className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`w-4 h-4 transition-all duration-300 ${!darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
-                )}
-              </span>
-            </button>
+                </span>
+                {/* Moon Icon (right) */}
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`w-4 h-4 transition-all duration-300 ${darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                  </svg>
+                </span>
+                {/* Slider Thumb */}
+                <span
+                  className={`absolute top-1/2 -translate-y-1/2 z-20 w-6 h-6 rounded-full bg-white/80 dark:bg-gray-900/80 shadow-md border-2 border-purple-200 dark:border-purple-700 transition-all duration-500 flex items-center justify-center ${darkMode ? 'right-1' : 'left-1'}`}
+                  style={{ boxShadow: '0 2px 8px 0 rgba(130, 88, 159, 0.18)' }}
+                >
+                  {darkMode ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-purple-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-yellow-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  )}
+                </span>
+              </button>
+              {/* Hamburger for mobile */}
+              <button
+                className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 border border-purple-200"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle navigation menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
           </div>
+          {/* Mobile Nav Links */}
+          {mobileMenuOpen && (
+            <div className="md:hidden w-full mt-2 animate-fade-in">
+              <div className="flex flex-col space-y-2 bg-white/90 dark:bg-gray-900/90 rounded-xl p-4 shadow-lg">
+                {navItems.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className={`px-3 py-2 rounded-lg text-base font-semibold transition-colors relative group overflow-hidden
+                      ${activeSection === item.href.replace('#', '')
+                        ? 'text-purple-700 dark:text-purple-200'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-200'}
+                    `}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Animated Gradient Hero Section */}
       <section id="home" className="relative h-[95vh] flex items-center justify-center overflow-hidden pt-16 md:pt-24">
-        {/* Animated Gradient Circles */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-purple-400 via-pink-300 to-blue-400 rounded-full blur-3xl opacity-60 animate-float-slow z-0" />
-        <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-blue-400 via-purple-300 to-pink-300 rounded-full blur-2xl opacity-50 animate-float-medium z-0" />
-        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-gradient-to-br from-pink-400 via-purple-200 to-blue-200 rounded-full blur-3xl opacity-40 animate-float-fast z-0" />
+        {/* Subtle Animated Gradient Blob */}
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-br from-purple-400 via-pink-300 to-blue-400 rounded-full blur-3xl opacity-25 animate-float-slow z-0 pointer-events-none" />
         {/* Centered Floating Content */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full px-4">
           <motion.h5

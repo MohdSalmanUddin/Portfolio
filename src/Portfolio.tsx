@@ -7,31 +7,31 @@ const projects = [
   {
     title: 'Odoo Developer',
     type: 'Training',
-    image: '/images/portfolio/odoo_training.jpg',
+    image: '/Images/portfolio/odoo_training.jpg',
     link: '#',
   },
   {
     title: 'AWS',
     type: 'Training',
-    image: '/images/portfolio/aws_devops.jpg',
+    image: '/Images/portfolio/aws_devops.jpg',
     link: '#',
   },
   {
     title: 'Data Analysis',
     type: 'Training',
-    image: '/images/portfolio/data_analysis.jpg',
+    image: '/Images/portfolio/data_analysis.jpg',
     link: '#',
   },
   {
     title: 'Python Full Stack Developer',
     type: 'Training',
-    image: '/images/portfolio/tata cert.jpg',
+    image: '/Images/portfolio/tata cert.jpg',
     link: '#',
   },
   {
     title: 'Zero Trust Certified Associate',
     type: 'Certification',
-    image: '/images/portfolio/ZTCA.png',
+    image: '/Images/portfolio/ZTCA.png',
     link: '#',
   },
 

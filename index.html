@@ -2,10 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <!-- Theme persistence script -->
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('theme');
+          if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/png" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Mohammed Salman Uddin - Full Stack Developer & Data Analyst Portfolio" />
-    <title>Mohammed Salman Uddin - Portfolio</title>
+    <meta name="description" content="Mohammed Salman Uddin - Odoo Developer, Full Stack Developer, and Data Analyst. Expert in Odoo, Python, JavaScript, and business solutions. Explore my portfolio, projects, and professional experience." />
+    <meta name="keywords" content="Odoo Developer, Full Stack Developer, Data Analyst, Mohammed Salman Uddin, Python, JavaScript, Portfolio, ERP, Business Solutions, Riyadh, India, Web Development, Software Engineer, Custom Modules, Odoo.sh, API Integration, SQL, Bootstrap, Postgres, Cloud, AWS, Resume, Projects" />
+    <meta name="author" content="Mohammed Salman Uddin" />
+    <meta name="robots" content="index, follow" />
+    <title>Mohammed Salman Uddin - Odoo Developer & Full Stack Engineer Portfolio</title>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mohammed Salman Uddin - Odoo Developer & Full Stack Engineer Portfolio" />
+    <meta property="og:description" content="Portfolio of Mohammed Salman Uddin, Odoo Developer, Full Stack Developer, and Data Analyst. Explore projects, skills, and experience in Odoo, Python, JavaScript, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://buildwithsalman.me/" />
+    <meta property="og:image" content="https://buildwithsalman.me/Images/avatar.png" />
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mohammed Salman Uddin - Odoo Developer & Full Stack Engineer Portfolio" />
+    <meta name="twitter:description" content="Portfolio of Mohammed Salman Uddin, Odoo Developer, Full Stack Developer, and Data Analyst. Explore projects, skills, and experience in Odoo, Python, JavaScript, and more." />
+    <meta name="twitter:image" content="https://buildwithsalman.me/Images/avatar.png" />
+    <!-- Structured Data: Person & WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mohammed Salman Uddin",
+        "url": "https://buildwithsalman.me/",
+        "image": "https://buildwithsalman.me/Images/avatar.png",
+        "jobTitle": "Odoo Developer, Full Stack Developer, Data Analyst",
+        "description": "Portfolio of Mohammed Salman Uddin, Odoo Developer, Full Stack Developer, and Data Analyst. Expert in Odoo, Python, JavaScript, and business solutions.",
+        "sameAs": [
+          "https://www.linkedin.com/in/mohammedsalmanuddin",
+          "https://github.com/Salmanuddin-Training"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://buildwithsalman.me/",
+        "name": "Mohammed Salman Uddin Portfolio",
+        "description": "Portfolio of Mohammed Salman Uddin, Odoo Developer, Full Stack Developer, and Data Analyst."
+      }
+    </script>
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

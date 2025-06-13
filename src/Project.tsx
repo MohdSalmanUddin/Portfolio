@@ -142,7 +142,9 @@ export default function Project() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section className="section-padding container-custom w-full max-w-6xl mx-auto font-[Poppins,Inter,sans-serif]">
+    <section className="relative section-padding container-custom w-full max-w-6xl mx-auto font-[Poppins,Inter,sans-serif]">
+      {/* Subtle Animated Gradient Blob */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-purple-400 via-pink-300 to-blue-400 rounded-full blur-3xl opacity-20 animate-float-slow z-0 pointer-events-none" />
       <motion.h2
         className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-purple-700 dark:text-purple-300 drop-shadow-lg"
         initial={{ opacity: 0, y: 20 }}
@@ -172,6 +174,9 @@ export default function Project() {
           </motion.div>
         ))}
       </div>
+      <div className="mt-4 text-center text-purple-500 dark:text-purple-300 font-semibold text-base opacity-80">
+                And many more projects...
+              </div>
       {/* Modal Popup for Project Details */}
       {openIdx !== null && (
         <div
@@ -196,8 +201,10 @@ export default function Project() {
             <h3 className="text-2xl md:text-3xl font-bold text-purple-700 dark:text-purple-200 mb-2">{projects[openIdx].name}</h3>
             <p className="text-gray-700 dark:text-gray-300 text-base mb-6 max-w-xl">{projects[openIdx].desc}</p>
             {/* Scrollable features for HCM ESS, normal for Mazia */}
-            <div className={`w-full grid grid-cols-1 sm:grid-cols-2 gap-6 ${projects[openIdx].name === 'HCM Employee Self Service (ESS)' ? 'overflow-y-auto' : ''}`}
-              style={projects[openIdx].name === 'HCM Employee Self Service (ESS)' ? { maxHeight: '320px', paddingRight: '2px' } : {}}>
+            <div
+              className={`w-full grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-y-auto`}
+              style={{ maxHeight: '320px', paddingRight: '2px' }}
+            >
               {projects[openIdx].features.map((f, i) => (
                 <div key={f.title} className="bg-white/95 dark:bg-gray-900/95 rounded-2xl shadow p-5 flex flex-col items-center text-center border border-purple-100 dark:border-purple-800">
                   {f.icon}

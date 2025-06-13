@@ -21,7 +21,9 @@ const blogs = [
 
 export default function Blog() {
   return (
-    <section id="blog" className="section-padding container-custom w-full max-w-5xl mx-auto font-[Poppins,Inter,sans-serif]">
+    <section id="blog" className="section-padding container-custom w-full max-w-5xl mx-auto font-[Poppins,Inter,sans-serif] relative">
+      {/* Subtle Animated Gradient Blob */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-gradient-to-br from-purple-400 via-pink-300 to-blue-400 rounded-full blur-3xl opacity-30 animate-float-slow z-0 pointer-events-none" />
       <motion.h2
         className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-purple-700 dark:text-purple-300 drop-shadow-lg"
         initial={{ opacity: 0, y: 20 }}
