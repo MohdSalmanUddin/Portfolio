@@ -227,13 +227,14 @@ const App = () => {
           <motion.a
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.97 }}
-            href="#about"
+            href="/Mohammed%20Salman%20Uddin.pdf"
+            download
             className="odoo-btn mt-2 text-lg px-8 py-3 shadow-xl animate-pulse"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            More About Me
+            Download Resume
           </motion.a>
           {/* Social Links */}
           <div className="flex space-x-8 mt-10">
