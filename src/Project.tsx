@@ -2,7 +2,7 @@ import { FaUserCog, FaClipboardList, FaBell, FaFileAlt, FaMoneyCheckAlt, FaPlane
 import { MdOutlineAnnouncement, MdOutlineAssignmentInd } from 'react-icons/md';
 import { GiPayMoney } from 'react-icons/gi';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GitHubCalendar from 'react-github-calendar';
 
 const features = [
@@ -143,6 +143,12 @@ export default function Project() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [showContrib, setShowContrib] = useState(false);
   const [contribCount, setContribCount] = useState(0);
+  const [isChartReady, setIsChartReady] = useState(false);
+
+  // Reset isChartReady when popup opens
+  useEffect(() => {
+    if (showContrib) setIsChartReady(false);
+  }, [showContrib]);
 
   return (
     <section className="relative section-padding container-custom w-full max-w-6xl mx-auto font-[Poppins,Inter,sans-serif]">
@@ -243,7 +249,12 @@ export default function Project() {
               </svg>
             </button>
             <h3 className="text-xl font-bold text-purple-700 dark:text-white mb-2">GitHub Contributions</h3>
-            <div className="flex justify-center items-center w-full mb-2 min-h-[180px]">
+            <div className="relative flex justify-center items-center w-full mb-2 min-h-[180px]">
+              {!isChartReady && (
+                <div className="absolute inset-0 z-30 flex items-center justify-center rounded-3xl bg-white/70 dark:bg-gradient-to-br dark:from-[#2E2E2E] dark:via-[#34495E] dark:to-[#4A5A6A] backdrop-blur-2xl">
+                  <span className="text-gray-500 dark:text-gray-200 animate-pulse text-lg font-semibold">Loading contributions...</span>
+                </div>
+              )}
               <GitHubCalendar
                 username="MohdSalmanUddin"
                 colorScheme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'}
@@ -253,6 +264,7 @@ export default function Project() {
                 transformData={data => {
                   const last90 = data.slice(-90);
                   setContribCount(last90.filter(day => day.count > 0).length);
+                  setIsChartReady(true);
                   return last90;
                 }}
                 hideTotalCount
