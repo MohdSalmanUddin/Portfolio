@@ -3,6 +3,7 @@ import { MdOutlineAnnouncement, MdOutlineAssignmentInd } from 'react-icons/md';
 import { GiPayMoney } from 'react-icons/gi';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import GitHubCalendar from 'react-github-calendar';
 
 const features = [
   {
@@ -140,6 +141,8 @@ const projects = [
 
 export default function Project() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [showContrib, setShowContrib] = useState(false);
+  const [contribCount, setContribCount] = useState(0);
 
   return (
     <section className="relative section-padding container-custom w-full max-w-6xl mx-auto font-[Poppins,Inter,sans-serif]">
@@ -174,9 +177,9 @@ export default function Project() {
           </motion.div>
         ))}
       </div>
-      <div className="mt-4 text-center text-purple-500 dark:text-purple-300 font-semibold text-base opacity-80">
-                And many more projects...
-              </div>
+      <div className="mt-4 text-center text-purple-500 dark:text-purple-300 font-semibold text-base opacity-80 cursor-pointer underline" onClick={() => setShowContrib(true)}>
+        And many more projects...
+      </div>
       {/* Modal Popup for Project Details */}
       {openIdx !== null && (
         <div
@@ -212,6 +215,75 @@ export default function Project() {
                   <p className="text-gray-700 dark:text-gray-300 text-sm">{f.desc}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+      {/* GitHub Contributions Popup */}
+      {showContrib && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-2"
+          onClick={() => setShowContrib(false)}
+        >
+          <div
+            className="relative w-full max-w-md p-2 md:p-4 flex flex-col items-center text-center animate-fade-in bg-white/70 dark:bg-gradient-to-br dark:from-[#2E2E2E] dark:via-[#34495E] dark:to-[#4A5A6A] backdrop-blur-2xl rounded-3xl shadow-2xl border border-purple-200 dark:border-[#2C3E50]"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Thematic blurred gradient halo illustration */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+              <div className="w-80 h-80 rounded-full bg-gradient-to-br from-purple-500 via-pink-400 to-blue-400 blur-3xl opacity-30 animate-float-slow" />
+            </div>
+            <button
+              className="absolute top-4 right-4 text-purple-500 dark:text-purple-200 bg-white/60 dark:bg-gray-800/60 rounded-full p-2 shadow hover:bg-purple-100 dark:hover:bg-purple-800 transition-colors"
+              onClick={() => setShowContrib(false)}
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <h3 className="text-xl font-bold text-purple-700 dark:text-white mb-2">GitHub Contributions</h3>
+            <div className="flex justify-center items-center w-full mb-2 min-h-[180px]">
+              <GitHubCalendar
+                username="MohdSalmanUddin"
+                colorScheme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'}
+                blockSize={15}
+                blockMargin={4}
+                fontSize={16}
+                transformData={data => {
+                  const last90 = data.slice(-90);
+                  setContribCount(last90.filter(day => day.count > 0).length);
+                  return last90;
+                }}
+                hideTotalCount
+              />
+            </div>
+            {/* Custom total count for last 3 months with help tooltip */}
+            <div className="flex items-center justify-center gap-2 text-base font-semibold text-gray-800 dark:text-white mb-1 group">
+              {contribCount} contributions in the last 3 months
+              <span className="relative cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-purple-400 dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 16v-4m0-4h.01" />
+                </svg>
+                {/* Desktop tooltip */}
+                <span className="hidden sm:inline absolute left-1/2 -translate-x-1/2 top-auto bottom-full mb-2 w-56 px-3 py-2 rounded-lg bg-gray-900 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg border border-purple-500 break-words text-center" style={{minWidth: '180px'}}>Private contributions do not appear on this chart.</span>
+              </span>
+              {/* Mobile tooltip: fixed at bottom center of popup */}
+              <span className="sm:hidden fixed left-1/2 -translate-x-1/2 bottom-0 w-11/12 max-w-xs px-3 py-2 rounded-lg bg-gray-900 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg border border-purple-500 break-words text-center" style={{minWidth: '180px'}}>Private contributions do not appear on this chart.</span>
+            </div>
+            <div className="mt-2 text-xs text-gray-500 dark:text-white">Live contributions from <a href="https://github.com/MohdSalmanUddin" target="_blank" rel="noopener noreferrer" className="underline text-purple-500 dark:text-green-300">github.com/MohdSalmanUddin</a></div>
+            {/* Custom style for legend, month labels, and stats in dark mode */}
+            <style>{`
+              .react-github-calendar__legend, .react-github-calendar__count, .react-github-calendar__text, .react-github-calendar text, .react-github-calendar__month {
+                color: #111827;
+              }
+              html.dark .react-github-calendar__legend, html.dark .react-github-calendar__count, html.dark .react-github-calendar__text, html.dark .react-github-calendar text, html.dark .react-github-calendar__month {
+                color: #fff !important;
+              }
+            `}</style>
+            {/* Popup content remains above the halo */}
+            <div className="relative z-10 w-full flex flex-col items-center text-center">
             </div>
           </div>
         </div>

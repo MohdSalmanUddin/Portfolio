@@ -83,7 +83,7 @@ export default function Portfolio() {
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/70 to-pink-400/70 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 rounded-2xl">
               <span className="text-lg font-semibold mb-2">{proj.type}</span>
-              <button className="odoo-btn mt-2">View Details</button>
+              <button className="odoo-btn mt-2">Preview</button>
             </div>
             <div className="p-5">
               <h3 className="text-lg font-semibold mb-1 text-purple-700 dark:text-purple-300">{proj.title}</h3>
