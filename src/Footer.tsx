@@ -10,7 +10,7 @@ export default function Footer() {
           © {new Date().getFullYear()} <span className="font-bold text-purple-700 dark:text-purple-300">Mohammed Salman Uddin</span>. All rights reserved.
         </div>
         <div className="flex space-x-4">
-          <a href="https://github.com/Salmanuddin-Training" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform text-purple-400 hover:text-purple-700 dark:hover:text-purple-200">
+          <a href="https://github.com/MohdSalmanUddin" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform text-purple-400 hover:text-purple-700 dark:hover:text-purple-200">
             <FaGithub size={22} />
           </a>
           <a href="https://www.linkedin.com/in/mohammedsalmanuddin" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform text-purple-400 hover:text-purple-700 dark:hover:text-purple-200">

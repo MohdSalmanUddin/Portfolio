@@ -237,7 +237,7 @@ const App = () => {
           </motion.a>
           {/* Social Links */}
           <div className="flex space-x-8 mt-10">
-            <a href="https://github.com/Salmanuddin-Training" className="text-purple-400 hover:text-purple-700 dark:hover:text-purple-200 bg-white/60 dark:bg-gray-800/60 rounded-full p-3 shadow-lg transition-colors">
+            <a href="https://github.com/MohdSalmanUddin" className="text-purple-400 hover:text-purple-700 dark:hover:text-purple-200 bg-white/60 dark:bg-gray-800/60 rounded-full p-3 shadow-lg transition-colors">
               <FaGithub size={28} />
             </a>
             <a href="https://www.linkedin.com/in/mohammedsalmanuddin" className="text-purple-400 hover:text-purple-700 dark:hover:text-purple-200 bg-white/60 dark:bg-gray-800/60 rounded-full p-3 shadow-lg transition-colors">
