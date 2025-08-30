@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FaSun, FaMoon, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaSun, FaMoon, FaGithub, FaLinkedin, FaInstagram, FaTimes, FaBars } from 'react-icons/fa';
 import { SiUpwork, SiFiverr } from 'react-icons/si';
 import About from './About';
 import Resume from './Resume';
@@ -94,17 +94,36 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle navigation clicks
+  const handleNavClick = (href: string, isMobile: boolean = false) => {
+    // Close mobile menu only after a short delay to allow smooth scrolling
+    if (isMobile) {
+      setTimeout(() => {
+        setMobileMenuOpen(false);
+      }, 300); // Small delay to allow smooth scroll to start
+    } else {
+      setMobileMenuOpen(false);
+    }
+    
+    // Smooth scroll to section
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className={`min-h-screen font-sans ${darkMode ? 'dark bg-gray-950' : 'bg-white'} overflow-x-hidden`}>
-      {/* Fancy Glassmorphic Navbar */}
-      <nav className={`fixed w-full z-50 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl border-b border-gradient-to-r from-purple-400 via-pink-300 to-blue-400 dark:from-purple-900 dark:via-purple-700 dark:to-blue-900 transition-shadow ${navShadow ? 'shadow-2xl' : ''}`}
+      {/* Enhanced Responsive Glassmorphic Navbar */}
+      <nav className={`fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gradient-to-r from-purple-400 via-pink-300 to-blue-400 dark:from-purple-900 dark:via-purple-700 dark:to-blue-900 transition-all duration-300 ${navShadow ? 'shadow-2xl' : ''}`}
         style={{ WebkitBackdropFilter: 'blur(16px)', backdropFilter: 'blur(16px)', borderImage: 'linear-gradient(90deg, #a259c4 0%, #f06292 50%, #64b5f6 100%) 1' }}>
-        <div className="w-4/5 mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 w-full">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20 w-full">
             {/* Logo (left) */}
             <div className="flex-shrink-0 flex items-center">
               <motion.span 
-                className="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 dark:from-purple-400 dark:via-pink-400 dark:to-blue-400 select-none cursor-pointer relative group"
+                className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 dark:from-purple-400 dark:via-pink-400 dark:to-blue-400 select-none cursor-pointer relative group"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -123,14 +142,19 @@ const App = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 group-hover:w-full transition-all duration-300 ease-out"></span>
               </motion.span>
             </div>
+
             {/* Nav Links (center, hidden on mobile) */}
-            <div className="hidden md:flex flex-1 justify-center">
-              <div className="flex items-baseline space-x-4">
+            <div className="hidden lg:flex flex-1 justify-center">
+              <div className="flex items-baseline space-x-2 xl:space-x-6">
                 {navItems.map((item) => (
                   <a
                     key={item.label}
                     href={item.href}
-                    className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors relative group overflow-hidden
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.href, false);
+                    }}
+                    className={`px-2 xl:px-4 py-2 rounded-lg text-sm xl:text-base font-semibold transition-all duration-300 relative group overflow-hidden
                       ${activeSection === item.href.replace('#', '')
                         ? 'text-purple-700 dark:text-purple-200'
                         : 'text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-200'}
@@ -143,112 +167,156 @@ const App = () => {
                 ))}
               </div>
             </div>
+
             {/* Toggler and Hamburger (right) */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 lg:space-x-4">
               {/* Theme toggler */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="relative w-14 h-7 flex items-center rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 shadow-lg border-2 border-white/20 dark:border-gray-900/40 transition-colors duration-500 focus:outline-none focus:ring-2 focus:ring-purple-400 group"
+                className="relative w-12 h-6 lg:w-14 lg:h-7 flex items-center rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 shadow-lg border-2 border-white/20 dark:border-gray-900/40 transition-colors duration-500 focus:outline-none focus:ring-2 focus:ring-purple-400 group"
                 aria-label="Toggle theme"
-                style={{ minWidth: '58px', padding: 0 }}
+                style={{ minWidth: '48px', padding: 0 }}
               >
                 {/* Sun Icon (left) */}
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
-                  <svg xmlns="http://www.w3.org/2000/svg" className={`w-4 h-4 transition-all duration-300 ${!darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <span className="absolute left-1.5 lg:left-2 top-1/2 -translate-y-1/2 z-10">
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`w-3 h-3 lg:w-4 lg:h-4 transition-all duration-300 ${!darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </span>
                 {/* Moon Icon (right) */}
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
-                  <svg xmlns="http://www.w3.org/2000/svg" className={`w-4 h-4 transition-all duration-300 ${darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <span className="absolute right-1.5 lg:right-2 top-1/2 -translate-y-1/2 z-10">
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`w-3 h-3 lg:w-4 lg:h-4 transition-all duration-300 ${darkMode ? 'opacity-100 scale-110' : 'opacity-60 scale-90'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
                   </svg>
                 </span>
                 {/* Slider Thumb */}
                 <span
-                  className={`absolute top-1/2 -translate-y-1/2 z-20 w-6 h-6 rounded-full bg-white/80 dark:bg-gray-900/80 shadow-md border-2 border-purple-200 dark:border-purple-700 transition-all duration-500 flex items-center justify-center ${darkMode ? 'right-1' : 'left-1'}`}
+                  className={`absolute top-1/2 -translate-y-1/2 z-20 w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-white/80 dark:bg-gray-900/80 shadow-md border-2 border-purple-200 dark:border-purple-700 transition-all duration-500 flex items-center justify-center ${darkMode ? 'right-0.5 lg:right-1' : 'left-0.5 lg:left-1'}`}
                   style={{ boxShadow: '0 2px 8px 0 rgba(130, 88, 159, 0.18)' }}
                 >
                   {darkMode ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-purple-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 lg:w-4 lg:h-4 text-purple-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
                     </svg>
                   ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-yellow-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 lg:w-4 lg:h-4 text-yellow-400 transition-all duration-300 scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   )}
                 </span>
               </button>
-              {/* Hamburger for mobile */}
+
+              {/* Enhanced Hamburger for mobile */}
               <button
-                className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 border border-purple-200"
+                className="lg:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 border border-purple-200 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle navigation menu"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                <AnimatePresence mode="wait">
+                  {mobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FaTimes className="w-5 h-5 text-purple-600 dark:text-purple-300" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FaBars className="w-5 h-5 text-purple-600 dark:text-purple-300" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </button>
             </div>
           </div>
-          {/* Mobile Nav Links */}
-          {mobileMenuOpen && (
-            <div className="md:hidden w-full mt-2 animate-fade-in">
-              <div className="flex flex-col space-y-2 bg-white/90 dark:bg-gray-900/90 rounded-xl p-4 shadow-lg">
-                {navItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className={`px-3 py-2 rounded-lg text-base font-semibold transition-colors relative group overflow-hidden
-                      ${activeSection === item.href.replace('#', '')
-                        ? 'text-purple-700 dark:text-purple-200'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-200'}
-                    `}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="relative z-10">{item.label}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
+
+          {/* Enhanced Mobile Nav Links with Animation */}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div 
+                className="lg:hidden w-full mt-2"
+                initial={{ opacity: 0, height: 0, y: -20 }}
+                animate={{ opacity: 1, height: 'auto', y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-2xl p-4 shadow-2xl border border-purple-100 dark:border-purple-800">
+                  <div className="grid grid-cols-2 gap-2">
+                    {navItems.map((item, index) => (
+                      <motion.a
+                        key={item.label}
+                        href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(item.href, true);
+                        }}
+                        className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 relative group overflow-hidden text-center
+                          ${activeSection === item.href.replace('#', '')
+                            ? 'text-purple-700 dark:text-purple-200 bg-purple-50 dark:bg-purple-900/20'
+                            : 'text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-200 hover:bg-purple-50 dark:hover:bg-purple-900/10'}
+                        `}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
+                        <span className="relative z-10">{item.label}</span>
+                        <span className={`absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 rounded-full transition-all duration-300
+                          ${activeSection === item.href.replace('#', '') ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'}`}></span>
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </nav>
 
-      {/* Animated Gradient Hero Section */}
-      <section id="home" className="relative h-[95vh] flex items-center justify-center overflow-hidden pt-16 md:pt-24">
-        {/* Subtle Animated Gradient Blob */}
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-br from-purple-400 via-pink-300 to-blue-400 rounded-full blur-3xl opacity-25 animate-float-slow z-0 pointer-events-none" />
+      {/* Enhanced Responsive Hero Section */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 lg:pt-24">
+        {/* Responsive Animated Gradient Blob */}
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 xl:w-[28rem] xl:h-[28rem] bg-gradient-to-br from-purple-400 via-pink-300 to-blue-400 rounded-full blur-3xl opacity-25 animate-float-slow z-0 pointer-events-none" />
+        
         {/* Centered Floating Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center w-full px-4">
+        <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <motion.h5
-            className="text-lg text-purple-500 dark:text-purple-300 mb-4 tracking-widest font-semibold uppercase"
+            className="text-sm sm:text-base lg:text-lg xl:text-xl text-purple-500 dark:text-purple-300 mb-3 sm:mb-4 lg:mb-6 tracking-widest font-semibold uppercase text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             AVAILABLE FOR FREELANCE & FULL-TIME
           </motion.h5>
+          
           <motion.h1
-            className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight drop-shadow-lg text-center bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 tracking-tight drop-shadow-lg text-center bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x leading-tight"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
             Mohammed Salman Uddin
           </motion.h1>
-                     <motion.p
-             className="text-xl text-gray-700 dark:text-gray-300 mb-8 font-medium text-center max-w-4xl"
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, delay: 0.5 }}
-           >
-             Odoo Developer & Full Stack Engineer | Delivering Enterprise Solutions
-           </motion.p>
+          
+          <motion.p
+            className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-700 dark:text-gray-300 mb-6 sm:mb-8 lg:mb-12 font-medium text-center max-w-4xl lg:max-w-5xl xl:max-w-6xl leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            Odoo Developer & Full Stack Engineer | Delivering Enterprise Solutions
+          </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-6 mb-8"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 lg:gap-6 xl:gap-8 mb-6 sm:mb-8 md:mb-10 lg:mb-12 xl:mb-16 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl xl:max-w-2xl 2xl:max-w-4xl justify-center items-center landscape-buttons"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
@@ -258,7 +326,7 @@ const App = () => {
               whileTap={{ scale: 0.95 }}
               href="/Mohammed%20Salman%20Uddin.pdf"
               download
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-10 py-4 text-lg font-bold shadow-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105"
+              className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-12 py-2.5 sm:py-3 md:py-4 lg:py-4 xl:py-5 text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl font-bold shadow-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 text-center"
             >
               📄 Download Resume
             </motion.a>
@@ -283,58 +351,60 @@ const App = () => {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-transparent border-3 border-purple-400 text-purple-600 dark:text-purple-300 rounded-full px-10 py-4 text-lg font-bold shadow-2xl hover:bg-purple-400 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
+              className="w-full sm:w-auto bg-transparent border-2 border-purple-400 text-purple-600 dark:text-purple-300 rounded-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-12 py-2.5 sm:py-3 md:py-4 lg:py-4 xl:py-5 text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl font-bold shadow-2xl hover:bg-purple-400 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm text-center"
             >
               💼 Hire Me
             </motion.a>
           </motion.div>
-          {/* Social Links */}
-          <div className="flex space-x-6 mt-12">
+
+          {/* Enhanced Responsive Social Links */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-16 w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl landscape-optimized">
             <motion.a 
               href="https://github.com/MohdSalmanUddin" 
-              className="text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              className="text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-2.5 sm:p-3 md:p-4 lg:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <FaGithub size={24} />
+              <FaGithub size={20} className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
             </motion.a>
             <motion.a 
               href="https://www.linkedin.com/in/mohammedsalmanuddin" 
-              className="text-blue-600 hover:text-blue-700 dark:hover:text-blue-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              className="text-blue-600 hover:text-blue-700 dark:hover:text-blue-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-2.5 sm:p-3 md:p-4 lg:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <FaLinkedin size={24} />
+              <FaLinkedin size={20} className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
             </motion.a>
             <motion.a 
               href="https://www.instagram.com/perksofbeingrealistic.in/" 
-              className="text-pink-600 hover:text-pink-700 dark:hover:text-pink-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              className="text-pink-600 hover:text-pink-700 dark:hover:text-pink-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-2.5 sm:p-3 md:p-4 lg:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <FaInstagram size={24} />
+              <FaInstagram size={20} className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
             </motion.a>
             <motion.a 
               href="https://www.upwork.com/freelancers/~01294ae0bedb9ef675?mp_source=share" 
-              className="text-green-600 hover:text-green-700 dark:hover:text-green-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              className="text-green-600 hover:text-green-700 dark:hover:text-green-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-2.5 sm:p-3 md:p-4 lg:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <SiUpwork size={24} />
+              <SiUpwork size={20} className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
             </motion.a>
             <motion.a 
               href="https://www.fiverr.com/s/e6A8x9D" 
-              className="text-green-600 hover:text-green-700 dark:hover:text-green-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              className="text-green-600 hover:text-green-700 dark:hover:text-green-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-2.5 sm:p-3 md:p-4 lg:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <SiFiverr size={24} />
+              <SiFiverr size={20} className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
             </motion.a>
           </div>
         </div>
-        {/* Curved SVG Divider */}
+
+        {/* Enhanced Responsive Curved SVG Divider */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-12 md:h-16">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 sm:h-10 md:h-12 lg:h-16 xl:h-20">
             {/* First slim wave */}
             <path d="M0 30 Q360 60 720 30 T1440 30" stroke="url(#wave1)" strokeWidth="4" fill="none" />
             {/* Second slim wave, offset and lighter */}
