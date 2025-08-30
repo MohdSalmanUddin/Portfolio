@@ -16,7 +16,7 @@ const services = [
       'Data Migration',
       'Performance Optimization'
     ],
-    pricing: 'From $45/hour',
+    pricing: 'From $25/hour',
     category: 'ERP Development'
   },
   {
@@ -31,7 +31,7 @@ const services = [
       'Third-party Integrations',
       'Deployment & DevOps'
     ],
-    pricing: 'From $40/hour',
+    pricing: 'From $25/hour',
     category: 'Web Development'
   },
   {
@@ -46,7 +46,7 @@ const services = [
       'Security Implementation',
       'Monitoring & Maintenance'
     ],
-    pricing: 'From $45/hour',
+    pricing: 'From $25/hour',
     category: 'Database'
   },
   {
@@ -61,7 +61,7 @@ const services = [
       'Monitoring & Logging',
       'Cost Optimization'
     ],
-    pricing: 'From $50/hour',
+    pricing: 'From $25/hour',
     category: 'DevOps'
   },
   {
@@ -76,7 +76,7 @@ const services = [
       'Performance Monitoring',
       'Maintenance & Optimization'
     ],
-    pricing: 'From $45/hour',
+    pricing: 'From $25/hour',
     category: 'RPA Development'
   },
   {
@@ -91,7 +91,7 @@ const services = [
       'Error Handling & Monitoring',
       'Documentation & Testing'
     ],
-    pricing: 'From $45/hour',
+    pricing: 'From $25/hour',
     category: 'Integration'
   }
 ];
