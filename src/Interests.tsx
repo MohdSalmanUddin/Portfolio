@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FaCode, FaGlobe } from 'react-icons/fa';
 import { SiOdoo } from 'react-icons/si';
+import { FaRobot, FaDatabase, FaCloud, FaBrain, FaCogs } from 'react-icons/fa';
 
 const interests = [
   {
@@ -18,6 +19,31 @@ const interests = [
     title: 'Odoo Development',
     desc: 'Developing, customizing, and deploying Odoo ERP solutions for business automation.',
   },
+  {
+    icon: <FaRobot size={32} className="text-blue-500" />,
+    title: 'RPA & Automation',
+    desc: 'Building robotic process automation solutions to streamline business workflows.',
+  },
+  {
+    icon: <FaDatabase size={32} className="text-green-500" />,
+    title: 'Database Design',
+    desc: 'Designing and optimizing database architectures for scalable applications.',
+  },
+  {
+    icon: <FaCloud size={32} className="text-orange-500" />,
+    title: 'Cloud Infrastructure',
+    desc: 'Deploying and managing applications on cloud platforms like AWS and Azure.',
+  },
+  {
+    icon: <FaBrain size={32} className="text-indigo-500" />,
+    title: 'AI & Machine Learning',
+    desc: 'Exploring artificial intelligence, machine learning algorithms, and data science applications.',
+  },
+  {
+    icon: <FaCogs size={32} className="text-teal-500" />,
+    title: 'System Integration',
+    desc: 'Connecting different systems and APIs for seamless data flow.',
+  },
 ];
 
 export default function Interests() {
@@ -34,7 +60,7 @@ export default function Interests() {
         >
           Interests
         </motion.h2>
-        <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
           {interests.map((item, idx) => (
             <motion.div
               key={item.title}

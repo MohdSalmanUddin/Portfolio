@@ -41,7 +41,7 @@ const FlagAE = () => (
 
 const experiences = [
   {
-    title: 'Jr. Odoo Developer',
+    title: 'Odoo Developer',
     company: 'Telenoc Org',
     period: 'March 2025 – Present',
     logo: <TelenocLogo />,

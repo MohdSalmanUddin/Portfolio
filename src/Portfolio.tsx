@@ -34,6 +34,12 @@ const projects = [
     image: '/Images/portfolio/ZTCA.png',
     link: '#',
   },
+  {
+    title: 'UiPath Certificate',
+    type: 'Certification',
+    image: '/Images/portfolio/uipath_certificate.png',
+    link: '#',
+  },
 
 ];
 

@@ -127,8 +127,33 @@ export default function About() {
           <div className="flex-1 flex flex-col justify-center md:ml-[-90px]">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 mb-6 tracking-tight leading-tight text-center md:text-left" style={{ fontFamily: 'Montserrat, Poppins, Inter, sans-serif' }}>About Me</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-800 dark:text-gray-200 leading-relaxed font-medium text-center md:text-left" style={{ fontFamily: 'Montserrat, Poppins, Inter, sans-serif', lineHeight: 1.7 }}>
-              Experienced Odoo Developer at Telenoc Org, specializing in custom module development, system migrations, and seamless Odoo.sh deployments. I excel at collaborating with teams to deliver efficient business solutions and optimize workflows. Passionate about leveraging technology to drive results and committed to continuous professional growth.
+              Full-stack developer with 2 years of experience in Python, JavaScript, Odoo, and web technologies. Specializing in custom modules, system integrations, and web applications.
             </p>
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-medium text-center md:text-left mt-4" style={{ fontFamily: 'Montserrat, Poppins, Inter, sans-serif', lineHeight: 1.6 }}>
+                             <strong>Freelance Focus:</strong> Available for ERP development, web applications, database solutions, and system integrations.
+            </p>
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center gap-3 text-sm text-purple-600 dark:text-purple-300">
+                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <span>✅ Available for freelance projects and consulting</span>
+              </div>
+                             <div className="flex items-center gap-3 text-sm text-purple-600 dark:text-purple-300">
+                 <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                 <span>🚀 2+ years of development experience</span>
+               </div>
+               <div className="flex items-center gap-3 text-sm text-purple-600 dark:text-purple-300">
+                 <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                 <span>💼 Focused on business solutions</span>
+               </div>
+               <div className="flex items-center gap-3 text-sm text-purple-600 dark:text-purple-300">
+                 <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                 <span>🌍 Remote work & international projects</span>
+               </div>
+              <div className="flex items-center gap-3 text-sm text-purple-600 dark:text-purple-300">
+                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                <span>⚡ Fast turnaround & reliable delivery</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

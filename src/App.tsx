@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaSun, FaMoon, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { SiUpwork, SiFiverr } from 'react-icons/si';
 import About from './About';
 import Resume from './Resume';
 import Portfolio from './Portfolio';
@@ -12,15 +13,18 @@ import Experience from './Experience';
 import { loadAll } from "@tsparticles/all";
 import Project from './Project';
 import Blog from './Blog';
+import Services from './Services';
 
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
-  { label: 'Project', href: '#project' },
+  { label: 'Services', href: '#services' },
+  { label: 'Projects', href: '#project' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
 ];
 
-const sectionIds = ['home', 'about', 'project', 'contact'];
+const sectionIds = ['home', 'about', 'services', 'project', 'experience', 'contact'];
 
 const getInitialTheme = () => {
   if (typeof window !== 'undefined') {
@@ -95,11 +99,29 @@ const App = () => {
       {/* Fancy Glassmorphic Navbar */}
       <nav className={`fixed w-full z-50 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl border-b border-gradient-to-r from-purple-400 via-pink-300 to-blue-400 dark:from-purple-900 dark:via-purple-700 dark:to-blue-900 transition-shadow ${navShadow ? 'shadow-2xl' : ''}`}
         style={{ WebkitBackdropFilter: 'blur(16px)', backdropFilter: 'blur(16px)', borderImage: 'linear-gradient(90deg, #a259c4 0%, #f06292 50%, #64b5f6 100%) 1' }}>
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="w-4/5 mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 w-full">
             {/* Logo (left) */}
             <div className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 dark:from-purple-300 dark:via-pink-300 dark:to-blue-300 select-none">OdooDev</span>
+              <motion.span 
+                className="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 dark:from-purple-400 dark:via-pink-400 dark:to-blue-400 select-none cursor-pointer relative group"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  textShadow: "0 0 20px rgba(147, 51, 234, 0.5)"
+                }}
+                style={{
+                  backgroundImage: 'linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #3b82f6 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+                }}
+              >
+                Software Engineer
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 group-hover:w-full transition-all duration-300 ease-out"></span>
+              </motion.span>
             </div>
             {/* Nav Links (center, hidden on mobile) */}
             <div className="hidden md:flex flex-1 justify-center">
@@ -206,7 +228,7 @@ const App = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            HELLO, WORLD.
+            AVAILABLE FOR FREELANCE & FULL-TIME
           </motion.h5>
           <motion.h1
             className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight drop-shadow-lg text-center bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x"
@@ -216,37 +238,98 @@ const App = () => {
           >
             Mohammed Salman Uddin
           </motion.h1>
-          <motion.p
-            className="text-xl text-gray-700 dark:text-gray-300 mb-8 font-medium text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            Odoo Developer & Full Stack Engineer
-          </motion.p>
-          <motion.a
-            whileHover={{ scale: 1.07 }}
-            whileTap={{ scale: 0.97 }}
-            href="/Mohammed%20Salman%20Uddin.pdf"
-            download
-            className="odoo-btn mt-2 text-lg px-8 py-3 shadow-xl animate-pulse"
+                     <motion.p
+             className="text-xl text-gray-700 dark:text-gray-300 mb-8 font-medium text-center max-w-4xl"
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.8, delay: 0.5 }}
+           >
+             Odoo Developer & Full Stack Engineer | Delivering Enterprise Solutions
+           </motion.p>
+
+          <motion.div
+            className="flex flex-col sm:flex-row gap-6 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            Download Resume
-          </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/Mohammed%20Salman%20Uddin.pdf"
+              download
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-10 py-4 text-lg font-bold shadow-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105"
+            >
+              📄 Download Resume
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="#contact?action=hire"
+              onClick={(e) => {
+                e.preventDefault();
+                // Set the hash first
+                window.location.hash = '#contact?action=hire';
+                
+                // Dispatch custom event to ensure Contact component detects the change
+                setTimeout(() => {
+                  window.dispatchEvent(new CustomEvent('customHashChange'));
+                  console.log('Custom hash change event dispatched for hire');
+                }, 100);
+                
+                // Then scroll to contact section
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="bg-transparent border-3 border-purple-400 text-purple-600 dark:text-purple-300 rounded-full px-10 py-4 text-lg font-bold shadow-2xl hover:bg-purple-400 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
+            >
+              💼 Hire Me
+            </motion.a>
+          </motion.div>
           {/* Social Links */}
-          <div className="flex space-x-8 mt-10">
-            <a href="https://github.com/MohdSalmanUddin" className="text-purple-400 hover:text-purple-700 dark:hover:text-purple-200 bg-white/60 dark:bg-gray-800/60 rounded-full p-3 shadow-lg transition-colors">
-              <FaGithub size={28} />
-            </a>
-            <a href="https://www.linkedin.com/in/mohammedsalmanuddin" className="text-purple-400 hover:text-purple-700 dark:hover:text-purple-200 bg-white/60 dark:bg-gray-800/60 rounded-full p-3 shadow-lg transition-colors">
-              <FaLinkedin size={28} />
-            </a>
-            <a href="https://www.instagram.com/perksofbeingrealistic.in/" className="text-purple-400 hover:text-purple-700 dark:hover:text-purple-200 bg-white/60 dark:bg-gray-800/60 rounded-full p-3 shadow-lg transition-colors">
-              <FaInstagram size={28} />
-            </a>
+          <div className="flex space-x-6 mt-12">
+            <motion.a 
+              href="https://github.com/MohdSalmanUddin" 
+              className="text-gray-800 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FaGithub size={24} />
+            </motion.a>
+            <motion.a 
+              href="https://www.linkedin.com/in/mohammedsalmanuddin" 
+              className="text-blue-600 hover:text-blue-700 dark:hover:text-blue-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FaLinkedin size={24} />
+            </motion.a>
+            <motion.a 
+              href="https://www.instagram.com/perksofbeingrealistic.in/" 
+              className="text-pink-600 hover:text-pink-700 dark:hover:text-pink-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FaInstagram size={24} />
+            </motion.a>
+            <motion.a 
+              href="https://www.upwork.com/freelancers/~01294ae0bedb9ef675?mp_source=share" 
+              className="text-green-600 hover:text-green-700 dark:hover:text-green-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <SiUpwork size={24} />
+            </motion.a>
+            <motion.a 
+              href="https://www.fiverr.com/s/e6A8x9D" 
+              className="text-green-600 hover:text-green-700 dark:hover:text-green-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-4 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <SiFiverr size={24} />
+            </motion.a>
           </div>
         </div>
         {/* Curved SVG Divider */}
@@ -281,6 +364,7 @@ const App = () => {
       <About />
       <Interests />
       <Experience />
+      <Services />
       <section id="project">
         <Project />
       </section>

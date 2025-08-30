@@ -1,4 +1,4 @@
-import { FaUserCog, FaClipboardList, FaBell, FaFileAlt, FaMoneyCheckAlt, FaPlane, FaChartBar, FaCalendarCheck, FaFileUpload, FaUserFriends, FaHome, FaQrcode, FaWpforms, FaUsers, FaChartLine, FaMapMarkerAlt, FaGlobe, FaMap, FaSearchLocation, FaCheckCircle, FaFilePdf, FaCogs, FaSitemap, FaEdit } from 'react-icons/fa';
+import { FaUserCog, FaClipboardList, FaBell, FaFileAlt, FaMoneyCheckAlt, FaPlane, FaChartBar, FaCalendarCheck, FaFileUpload, FaUserFriends, FaHome, FaQrcode, FaWpforms, FaUsers, FaChartLine, FaMapMarkerAlt, FaGlobe, FaMap, FaSearchLocation, FaCheckCircle, FaFilePdf, FaCogs, FaSitemap, FaEdit, FaUniversity, FaShieldAlt, FaChartPie, FaUsersCog, FaFileContract, FaServer, FaDatabase, FaCode, FaNetworkWired, FaCreditCard, FaUndo, FaIndustry, FaWarehouse, FaShoppingCart } from 'react-icons/fa';
 import { MdOutlineAnnouncement, MdOutlineAssignmentInd } from 'react-icons/md';
 import { GiPayMoney } from 'react-icons/gi';
 import { motion } from 'framer-motion';
@@ -111,7 +111,6 @@ const projects = [
   },
   {
     name: 'Mazia',
-    // url: 'https://mazia.odoo.com/',
     icon: <FaHome className="text-4xl text-blue-500" />,
     desc: 'A property and villa portal for capturing investment interests and generating leads through multi-channel survey forms.',
     features: [
@@ -137,6 +136,154 @@ const projects = [
       },
     ]
   },
+  {
+    name: 'Ibrahim Al Quraishi - Payment Gateway Integration',
+    icon: <FaCreditCard className="text-4xl text-green-500" />,
+    desc: 'Advanced payment gateway integration solution with Geidea device integration, comprehensive POS module configuration, and automated refund processing workflows for retail operations.',
+    features: [
+      {
+        icon: <FaNetworkWired className="text-2xl text-purple-500" />,
+        title: 'Geidea Device Integration',
+        desc: 'Seamless integration with Geidea payment terminals, real-time transaction processing, device status monitoring, and automated communication protocols.'
+      },
+      {
+        icon: <FaCogs className="text-2xl text-blue-400" />,
+        title: 'Payment Method Configuration',
+        desc: 'Comprehensive payment gateway setup with multiple payment options, secure transaction handling, and automated payment method validation and routing.'
+      },
+      {
+        icon: <FaMoneyCheckAlt className="text-2xl text-green-400" />,
+        title: 'POS Module Integration',
+        desc: 'Full integration with Point of Sale systems, real-time inventory updates, transaction synchronization, and seamless customer experience across all touchpoints.'
+      },
+      {
+        icon: <FaUndo className="text-2xl text-pink-400" />,
+        title: 'Automated Refund Processing',
+        desc: 'Streamlined refund workflow with automated approval processes, transaction reversal handling, and comprehensive audit trail for financial compliance.'
+      },
+      {
+        icon: <FaShieldAlt className="text-2xl text-indigo-400" />,
+        title: 'Security & Compliance',
+        desc: 'PCI DSS compliant payment processing, encrypted transaction data, fraud detection mechanisms, and secure API communication protocols.'
+      },
+      {
+        icon: <FaChartLine className="text-2xl text-orange-400" />,
+        title: 'Transaction Analytics & Reporting',
+        desc: 'Real-time transaction monitoring, payment success rate analytics, device performance metrics, and comprehensive financial reporting dashboard.'
+      },
+    ],
+  },
+  {
+    name: 'Alshal - Manufacturing & Warehouse Management System',
+    icon: <FaIndustry className="text-4xl text-orange-500" />,
+    desc: 'Comprehensive manufacturing and warehouse management solution with integrated POS operations, advanced restriction management, and automated report generation for operational efficiency.',
+    features: [
+      {
+        icon: <FaIndustry className="text-2xl text-purple-500" />,
+        title: 'Manufacturing Process Management',
+        desc: 'End-to-end manufacturing workflow automation, production planning, quality control integration, and real-time production monitoring with performance analytics.'
+      },
+      {
+        icon: <FaWarehouse className="text-2xl text-blue-400" />,
+        title: 'Warehouse Operations & Inventory Control',
+        desc: 'Advanced warehouse management with real-time inventory tracking, automated stock replenishment, location management, and comprehensive inventory optimization.'
+      },
+      {
+        icon: <FaShoppingCart className="text-2xl text-green-400" />,
+        title: 'POS Integration & Retail Operations',
+        desc: 'Seamless Point of Sale integration with real-time inventory synchronization, customer transaction processing, and automated sales reporting.'
+      },
+      {
+        icon: <FaShieldAlt className="text-2xl text-pink-400" />,
+        title: 'Advanced Restriction Management',
+        desc: 'Comprehensive access control with role-based permissions, workflow restrictions, approval hierarchies, and automated compliance monitoring.'
+      },
+      {
+        icon: <FaFileAlt className="text-2xl text-indigo-400" />,
+        title: 'Automated Report Generation',
+        desc: 'Advanced reporting system with customizable dashboards, automated report scheduling, multi-format export capabilities, and real-time data visualization.'
+      },
+      {
+        icon: <FaChartBar className="text-2xl text-orange-400" />,
+        title: 'Operational Analytics & Insights',
+        desc: 'Comprehensive analytics dashboard with manufacturing efficiency metrics, warehouse performance indicators, sales analytics, and business insights for optimization.'
+      },
+    ],
+  },
+  {
+    name: 'CNTXT - Enterprise Process Management System',
+    icon: <FaClipboardList className="text-4xl text-blue-500" />,
+    desc: 'Comprehensive enterprise process management solution with leave management, purchase requisition, business trip management, and employee delegation workflows with system implementation and deployment.',
+    features: [
+      {
+        icon: <FaCalendarCheck className="text-2xl text-purple-500" />,
+        title: 'Advanced Leave Management System',
+        desc: 'Comprehensive leave request workflow with approval chains, leave balance tracking, calendar integration, and automated notification systems for managers and employees.'
+      },
+      {
+        icon: <FaFileAlt className="text-2xl text-blue-400" />,
+        title: 'Purchase Requisition Management',
+        desc: 'Streamlined procurement workflow with budget validation, multi-level approval routing, vendor management integration, and automated purchase order generation.'
+      },
+      {
+        icon: <FaPlane className="text-2xl text-green-400" />,
+        title: 'Business Trip & Training Management',
+        desc: 'End-to-end travel management system with expense tracking, approval workflows, budget allocation, and comprehensive reporting for business and training trips.'
+      },
+      {
+        icon: <FaMoneyCheckAlt className="text-2xl text-pink-400" />,
+        title: 'Expense Management & Reimbursement',
+        desc: 'Automated expense processing with receipt validation, policy compliance checking, approval workflows, and seamless integration with financial systems.'
+      },
+      {
+        icon: <FaUsers className="text-2xl text-indigo-400" />,
+        title: 'Employee Delegation Management',
+        desc: 'Advanced delegation system with temporary authority assignment, role-based access control, approval chain management, and automated workflow routing.'
+      },
+      {
+        icon: <FaChartBar className="text-2xl text-orange-400" />,
+        title: 'Process Analytics & Reporting',
+        desc: 'Comprehensive dashboard with process metrics, approval cycle times, expense analytics, and real-time insights for operational efficiency and decision making.'
+      },
+    ],
+  },
+  {
+    name: 'Majmaa University - Enterprise Resource Planning System',
+    icon: <FaUniversity className="text-4xl text-purple-500" />,
+    desc: 'Comprehensive ERP solution with advanced project management, HR recruitment, and contract management modules with system enhancements and optimizations.',
+    features: [
+      {
+        icon: <FaChartPie className="text-2xl text-purple-500" />,
+        title: 'Advanced Project Management & Financial Control',
+        desc: 'Project proposal workflow engine, dynamic profit margin calculation, multi-tier financial offer management, and budget control with excise reporting.'
+      },
+      {
+        icon: <FaShieldAlt className="text-2xl text-blue-400" />,
+        title: 'Multi-Level Approval Architecture',
+        desc: 'Hierarchical approval matrix with role-based access control, temporary authority delegation, and workflow state management with approval chain validation.'
+      },
+      {
+        icon: <FaUsersCog className="text-2xl text-pink-400" />,
+        title: 'HR Recruitment & Contract Management',
+        desc: 'Service-based hiring flow with project requirement mapping, contract lifecycle management, and candidate onboarding workflow with access provisioning.'
+      },
+      {
+        icon: <FaFileContract className="text-2xl text-green-400" />,
+        title: 'Advanced Reporting & Analytics',
+        desc: 'Multi-format report generation, multi-language support, exception handling with detailed error logging, and real-time dashboard analytics.'
+      },
+      {
+        icon: <FaServer className="text-2xl text-orange-400" />,
+        title: 'Infrastructure & DevOps',
+        desc: 'UAT environment setup, production server deployment on on-premise cloud infrastructure, Nginx load balancer configuration, and PostgreSQL optimization.'
+      },
+      {
+        icon: <FaCode className="text-2xl text-indigo-400" />,
+        title: 'Technical Architecture',
+        desc: 'Microservices architecture with modular design patterns, RESTful API integration, database schema optimization, and role-based access control (RBAC).'
+      },
+    ],
+  },
 ];
 
 export default function Project() {
@@ -144,6 +291,18 @@ export default function Project() {
   const [showContrib, setShowContrib] = useState(false);
   const [contribCount, setContribCount] = useState(0);
   const [isChartReady, setIsChartReady] = useState(false);
+
+  // Function to handle Get Quote button click
+  const handleGetQuote = () => {
+    // Navigate to contact form with Odoo Development service
+    window.location.hash = `#contact?action=quote&service=Odoo Development`;
+    
+    // Scroll to contact form
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // Reset isChartReady when popup opens
   useEffect(() => {
@@ -160,8 +319,17 @@ export default function Project() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Projects
+        Featured Projects
       </motion.h2>
+      <motion.p
+        className="text-xl text-gray-600 dark:text-gray-300 text-center mb-16 max-w-4xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        A showcase of my growing expertise in Odoo development, ERP solutions, and full-stack applications. 
+        Each project demonstrates my ability to deliver business solutions with clean code and good user experience.
+      </motion.p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
         {projects.map((proj, idx) => (
           <motion.div
@@ -183,9 +351,92 @@ export default function Project() {
           </motion.div>
         ))}
       </div>
-      <div className="mt-4 text-center text-purple-500 dark:text-purple-300 font-semibold text-base opacity-80 cursor-pointer underline" onClick={() => setShowContrib(true)}>
-        And many more projects...
-      </div>
+      <motion.div 
+        className="mt-8 text-center cursor-pointer group relative"
+        onClick={() => setShowContrib(true)}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        whileHover={{ scale: 1.05 }}
+      >
+        <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-100 via-pink-100 to-blue-100 dark:from-purple-900/30 dark:via-pink-900/30 dark:to-blue-900/30 rounded-full px-6 py-3 border border-purple-200 dark:border-purple-700 shadow-lg hover:shadow-xl transition-all duration-300">
+          <span className="text-lg font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+            And many more projects...
+          </span>
+          <motion.div
+            className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.7, 1, 0.7]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="w-2 h-2 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.7, 1, 0.7]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5
+            }}
+          />
+          <motion.div
+            className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.7, 1, 0.7]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          />
+        </div>
+        <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 font-medium">
+          Click to explore more
+        </div>
+      </motion.div>
+      
+      {/* Call to Action for Freelancing */}
+      <motion.div
+        className="mt-20 text-center bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-3xl p-8 md:p-12"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <h3 className="text-3xl font-bold text-purple-700 dark:text-purple-300 mb-4">
+          Ready to Start Your Project?
+        </h3>
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+          With 2 years of experience, I'm available for freelance projects and can help you build custom Odoo solutions, 
+          develop web applications, or integrate systems. Let's discuss your requirements and create something amazing together!
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#contact"
+            onClick={handleGetQuote}
+            className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            Get Free Quote
+          </a>
+          <a
+            href="#services"
+            className="px-8 py-3 border-2 border-purple-500 text-purple-600 dark:text-purple-300 rounded-full font-semibold hover:bg-purple-500 hover:text-white transition-all duration-300 transform hover:scale-105"
+          >
+            View Services
+          </a>
+        </div>
+      </motion.div>
       {/* Modal Popup for Project Details */}
       {openIdx !== null && (
         <div
