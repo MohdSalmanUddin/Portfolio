@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaSun, FaMoon, FaGithub, FaLinkedin, FaInstagram, FaTimes, FaBars } from 'react-icons/fa';
+import { FaSun, FaMoon, FaGithub, FaLinkedin, FaTimes, FaBars } from 'react-icons/fa';
 import { SiUpwork, SiFiverr } from 'react-icons/si';
 import About from './About';
 import Resume from './Resume';
@@ -375,14 +375,7 @@ const App = () => {
             >
               <FaLinkedin size={20} className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
             </motion.a>
-            <motion.a 
-              href="https://www.instagram.com/perksofbeingrealistic.in/" 
-              className="text-pink-600 hover:text-pink-700 dark:hover:text-pink-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-2.5 sm:p-3 md:p-4 lg:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaInstagram size={20} className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
-            </motion.a>
+
             <motion.a 
               href="https://www.upwork.com/freelancers/~01294ae0bedb9ef675?mp_source=share" 
               className="text-green-600 hover:text-green-700 dark:hover:text-green-400 bg-white/80 dark:bg-gray-800/80 rounded-full p-2.5 sm:p-3 md:p-4 lg:p-5 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-gray-200 dark:border-gray-700"

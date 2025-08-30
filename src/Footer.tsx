@@ -1,4 +1,5 @@
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { SiUpwork, SiFiverr } from 'react-icons/si';  
 
 export default function Footer() {
   return (
@@ -16,8 +17,11 @@ export default function Footer() {
           <a href="https://www.linkedin.com/in/mohammedsalmanuddin" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform text-purple-400 hover:text-purple-700 dark:hover:text-purple-200">
             <FaLinkedin size={22} />
           </a>
-          <a href="https://www.instagram.com/perksofbeingrealistic.in/" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform text-purple-400 hover:text-purple-700 dark:hover:text-purple-200">
-            <FaInstagram size={22} />
+          <a href="https://www.upwork.com/freelancers/~01294ae0bedb9ef675?mp_source=share" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform text-purple-400 hover:text-purple-700 dark:hover:text-purple-200">
+            <SiUpwork size={22} />
+          </a>
+          <a href="https://www.fiverr.com/s/e6A8x9D" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform text-purple-400 hover:text-purple-700 dark:hover:text-purple-200">
+            <SiFiverr size={22} />
           </a>
         </div>
       </div>
